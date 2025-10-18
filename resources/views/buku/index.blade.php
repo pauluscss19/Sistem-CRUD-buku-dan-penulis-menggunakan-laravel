@@ -1,8 +1,12 @@
+<!-- Menggunakan layout utama dari layouts.app -->
 @extends('layouts.app')
 
+<!-- Menentukan judul halaman -->
 @section('title', 'Data Buku')
 
+<!-- Konten utama halaman -->
 @section('content')
+<!-- Header dan tombol untuk menambah buku baru -->
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold">
         <i class="bi bi-book text-primary me-2"></i>Data Buku
@@ -12,10 +16,13 @@
     </a>
 </div>
 
+<!-- Kartu untuk menampilkan tabel data buku -->
 <div class="card">
     <div class="card-body">
+        <!-- Tabel responsif untuk menampilkan daftar buku -->
         <div class="table-responsive">
             <table class="table table-hover">
+                <!-- Header tabel dengan kolom-kolom informasi buku -->
                 <thead class="table-light">
                     <tr>
                         <th style="width: 5%;">No</th>
@@ -28,14 +35,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Looping untuk menampilkan setiap data buku -->
                     @forelse($buku as $item)
                         <tr>
+                            <!-- Nomor urut dengan penyesuaian paginasi -->
                             <td>{{ $loop->iteration + ($buku->currentPage() - 1) * $buku->perPage() }}</td>
                             <td>{{ $item->judul }}</td>
                             <td><span class="badge bg-secondary">{{ $item->isbn }}</span></td>
                             <td>{{ $item->penulis->nama }}</td>
                             <td>{{ $item->tahun_terbit }}</td>
                             <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
+                            <!-- Tombol aksi untuk melihat detail, edit, dan hapus -->
                             <td>
                                 <div class="btn-group" role="group">
                                     <a href="{{ route('buku.show', $item->id) }}" class="btn btn-sm btn-info" title="Detail">
@@ -54,6 +64,7 @@
                                 </div>
                             </td>
                         </tr>
+                    <!-- Pesan jika tidak ada data buku -->
                     @empty
                         <tr>
                             <td colspan="7" class="text-center py-4 text-muted">
@@ -66,6 +77,7 @@
             </table>
         </div>
         
+        <!-- Navigasi paginasi untuk data yang banyak -->
         <div class="d-flex justify-content-end mt-3">
             {{ $buku->links() }}
         </div>

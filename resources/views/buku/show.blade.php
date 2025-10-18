@@ -1,8 +1,12 @@
+<!-- Menggunakan layout utama dari layouts.app -->
 @extends('layouts.app')
 
+<!-- Menentukan judul halaman -->
 @section('title', 'Detail Buku')
 
+<!-- Konten utama halaman -->
 @section('content')
+<!-- Header dan breadcrumb untuk navigasi -->
 <div class="mb-4">
     <h2 class="fw-bold">
         <i class="bi bi-info-circle text-primary me-2"></i>Detail Buku
@@ -15,9 +19,11 @@
     </nav>
 </div>
 
+<!-- Kartu untuk menampilkan detail buku -->
 <div class="card">
     <div class="card-body">
         <div class="row">
+            <!-- Tabel untuk menampilkan informasi buku -->
             <div class="col-md-8">
                 <table class="table table-borderless">
                     <tr>
@@ -56,6 +62,7 @@
                     </tr>
                 </table>
 
+                <!-- Menampilkan sinopsis buku jika ada -->
                 @if($buku->sinopsis)
                     <div class="mt-4">
                         <h5 class="fw-bold mb-3">Sinopsis</h5>
@@ -64,6 +71,7 @@
                 @endif
             </div>
 
+            <!-- Kartu kecil untuk menampilkan ikon dan ringkasan buku -->
             <div class="col-md-4">
                 <div class="card bg-light">
                     <div class="card-body text-center">
@@ -75,6 +83,7 @@
             </div>
         </div>
 
+        <!-- Tombol aksi untuk edit, hapus, dan kembali -->
         <div class="mt-4 d-flex gap-2">
             <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning">
                 <i class="bi bi-pencil me-1"></i>Edit

@@ -8,18 +8,21 @@ use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
+    // Menampilkan daftar buku dengan paginasi, diurutkan terbaru
     public function index()
     {
         $buku = Buku::with('penulis')->latest()->paginate(10);
         return view('buku.index', compact('buku'));
     }
 
+    // Menampilkan form untuk membuat buku baru
     public function create()
     {
         $penulis = Penulis::all();
         return view('buku.create', compact('penulis'));
     }
 
+    // Menyimpan data buku baru ke database
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -38,18 +41,21 @@ class BukuController extends Controller
             ->with('success', 'Buku berhasil ditambahkan!');
     }
 
+    // Menampilkan detail buku tertentu
     public function show(Buku $buku)
     {
         $buku->load('penulis');
         return view('buku.show', compact('buku'));
     }
 
+    // Menampilkan form untuk mengedit buku
     public function edit(Buku $buku)
     {
         $penulis = Penulis::all();
         return view('buku.edit', compact('buku', 'penulis'));
     }
 
+    // Memperbarui data buku di database
     public function update(Request $request, Buku $buku)
     {
         $validated = $request->validate([
@@ -68,6 +74,7 @@ class BukuController extends Controller
             ->with('success', 'Buku berhasil diperbarui!');
     }
 
+    // Menghapus buku dari database
     public function destroy(Buku $buku)
     {
         $buku->delete();
