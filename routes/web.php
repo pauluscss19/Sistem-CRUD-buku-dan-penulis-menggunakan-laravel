@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\BukuController;
-use App\Http\Controllers\PenulisController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\ProyekController;
 
-Route::get('/', function () {
-    return redirect()->route('buku.index');
-});
 
-// Route Resource untuk Buku
-Route::resource('buku', BukuController::class);
+// Routes untuk Mahasiswa
+Route::resource('mahasiswas', MahasiswaController::class);
 
-// Route Resource untuk Penulis
-Route::resource('penulis', PenulisController::class);
+// Routes untuk Dosen
+Route::resource('dosens', DosenController::class);
+
+// Routes untuk Proyek
+Route::resource('proyeks', ProyekController::class);
